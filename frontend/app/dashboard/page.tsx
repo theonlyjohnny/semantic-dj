@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/app/utils/supabase/server';
+import { getCurrentUserPremiumStatus } from '@/app/utils/spotify-auth';
 
 export default async function Dashboard() {
   const supabase = createClient();
@@ -12,6 +13,8 @@ export default async function Dashboard() {
       console.error("No user found");
       redirect('/');
     }
+    
+    const premiumStatus = await getCurrentUserPremiumStatus();
     
     return (
       <main className="flex min-h-screen flex-col items-center p-8 gap-8">
@@ -41,6 +44,7 @@ export default async function Dashboard() {
               <p><span className="font-semibold">Name:</span> {user.user_metadata?.name || 'Not available'}</p>
               <p><span className="font-semibold">Email:</span> {user.email || 'Not available'}</p>
               <p><span className="font-semibold">Spotify ID:</span> {user.user_metadata?.provider_id || 'Not available'}</p>
+              <p><span className="font-semibold">Premium Status:</span> {premiumStatus === 'premium' ? 'Premium' : 'Free'}</p>
               
               <div className="pt-4">
                 <Link
