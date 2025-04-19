@@ -17,29 +17,37 @@ export default async function Home() {
 
         <div className="flex flex-col items-center gap-4 w-full max-w-md">
           {user ? (
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full flex flex-col gap-4">
-              <h2 className="text-xl font-semibold text-black dark:text-white">Welcome, {user.user_metadata.name || user.email}</h2>
-              <p className="text-black dark:text-white">You are logged in via Spotify</p>
-              {user.user_metadata.avatar_url && (
-                <img
-                  src={user.user_metadata.avatar_url}
-                  alt="User avatar"
-                  className="w-20 h-20 rounded-full mx-auto"
-                />
-              )}
-              <Link
-                href="/dashboard"
-                className="w-full bg-green-500 text-white p-2 rounded-lg text-center hover:bg-green-600 transition"
-              >
-                Go to Dashboard
-              </Link>
-              <Link
-                href="/auth/logout"
-                className="w-full bg-red-500 text-white p-2 rounded-lg text-center hover:bg-red-600 transition"
-              >
-                Logout
-              </Link>
-            </div>
+            <>
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full flex flex-col gap-4">
+                <h2 className="text-xl font-semibold text-black dark:text-white">Welcome, {user.user_metadata.name || user.email}</h2>
+                <p className="text-black dark:text-white">You are logged in via Spotify</p>
+                {user.user_metadata.avatar_url && (
+                  <img
+                    src={user.user_metadata.avatar_url}
+                    alt="User avatar"
+                    className="w-20 h-20 rounded-full mx-auto"
+                  />
+                )}
+                <Link
+                  href="/player"
+                  className="w-full bg-green-500 text-white p-3 rounded-lg text-center hover:bg-green-600 transition text-lg font-semibold"
+                >
+                  Begin Vibe Jockey
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="w-full bg-blue-500 text-white p-2 rounded-lg text-center hover:bg-blue-600 transition"
+                >
+                  Go to Dashboard
+                </Link>
+                <Link
+                  href="/auth/logout"
+                  className="w-full bg-red-500 text-white p-2 rounded-lg text-center hover:bg-red-600 transition"
+                >
+                  Logout
+                </Link>
+              </div>
+            </>
           ) : (
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full flex flex-col gap-4">
               <h2 className="text-xl font-semibold text-black dark:text-white">Login to Vibe Jockey</h2>
